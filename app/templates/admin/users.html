@@ -6,13 +6,13 @@
             <div><strong>Username: </strong>{{user.username}}</div>
             <div><strong>Email: </strong>{{user.email}}</div>
             <div ng-if='user.townName'><strong>Town: </strong>{{user.townName}}</div>
-            <div ng-if='ad.townName'><strong>Town: </strong>{{ad.townName}}</div>
+            <div ng-if='user.townName'><strong>Town: </strong>{{user.townName}}</div>
 
             <div>
-                <a ng-click="getUserAdById(ad.id)" href="#/user/delete/{{user.id}}" class="button">Delete</a>
+                <a ng-click="delete(user.username)" href="#/admin/users/delete/{{user.id}}" class="button">Delete</a>
             </div>
             <div>
-                <a ng-click="getUserAdById(ad.id)" href="#/user/edit/{{user.id}}" class="button">Edit</a>
+                <a ng-click="getOne(user)" href="#/admin/users/edit/{{user.id}}" class="button">Edit</a>
             </div>
         </li>
     </ul>

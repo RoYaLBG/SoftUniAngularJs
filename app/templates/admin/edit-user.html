@@ -1,0 +1,30 @@
+<div class="box">
+    <h2>Edit User</h2>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" ng-model="userData.name" value="{{userData.name}}"/>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" ng-model="userData.email"/>
+    </div>
+    <div>
+        <label for="phoneNumber">PhoneNumber:</label>
+        <input type="text" id="phoneNumber" ng-model="userData.phoneNumber" />
+    </div>
+    <div>
+        <label for="town">Town:</label>
+        <select id="town" ng-model="userData.townId">
+            <option value="null">(None)</option>
+            <option ng-repeat="t in towns" value="{{t.id}}">{{t.name}}</option>
+        </select>
+    </div>
+    <div>
+        <label for="isAdmin">Admin:</label>
+        <input ng-model="userData.isAdmin" ng-checked="{{userData.isAdmin}}" type="checkbox" id="isAdmin"/>
+    </div>
+    <div>
+        <a ng-click="editUserAds(adData)" class="button">Edit</a>
+        <a href="#/user/ads" class="button">Cancel</a>
+    </div>
+</div>

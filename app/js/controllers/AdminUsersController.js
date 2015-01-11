@@ -19,6 +19,26 @@ app.controller('AdminUsersController',
            );
         };
 
+       $scope.getOne = function(userData) {
+           $scope.userData = userData;
+           console.log($scope.userData);
+
+       };
+
+       $scope.delete = function(userName) {
+            userService.delete(
+                userName,
+                    function success() {
+                        notifyService.showInfo('Successfully deleted the user');
+                    },
+                    function error(err) {
+                        notifyService.showError("Cannot delete user", err);
+                    }
+            )
+       }
+
+
+
        $scope.getAll();
    }
 );

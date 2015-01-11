@@ -1,7 +1,9 @@
 'use strict';
 
 app.controller('HomeController',
-   function ($scope, adsService, notifyService, pageSize) {
+   function ($scope, $rootScope, adsService, notifyService, pageSize) {
+       $rootScope.pageTitle = "Home";
+
       $scope.adsParams = {
           'startPage' : 1,
           'pageSize' : pageSize
@@ -20,17 +22,17 @@ app.controller('HomeController',
       };
 
       $scope.reloadAds();
-	  
-      $scope.$on("categorySelectionChanged", function(event, selectedCategoryId) {
-          $scope.adsParams.categoryId = selectedCategoryId;
-          $scope.adsParams.startPage = 1;
-          $scope.reloadAds();
-      });
 
-      $scope.$on("townSelectionChanged", function(event, selectedTownId) {
-          $scope.adsParams.townId = selectedTownId;
-          $scope.adsParams.startPage = 1;
-          $scope.reloadAds();
-      });
+        $scope.$on("categorySelectionChanged", function(event, selectedCategoryId) {
+            $scope.adsParams.categoryId = selectedCategoryId;
+            $scope.adsParams.startPage = 1;
+            $scope.reloadAds();
+        });
+
+        $scope.$on("townSelectionChanged", function(event, selectedTownId) {
+            $scope.adsParams.townId = selectedTownId;
+            $scope.adsParams.startPage = 1;
+            $scope.reloadAds();
+        });
    }
 );

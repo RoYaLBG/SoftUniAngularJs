@@ -1,0 +1,26 @@
+<div class="box">
+    <h2>Edit Profile</h2>
+    <p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" ng-model="adData.name"/>
+    </p>
+    <p>
+        <label for="email">Email:</label>
+        <input type="text" id="email" ng-model="adData.email"/>
+    </p>
+    <p>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" ng-model="adData.phoneNumber"/>
+    </p>
+    <p>
+        <label for="town">Town:</label>
+        <select id="town" ng-model="adData.townId">
+            <option value="null">(None)</option>
+            <option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+        </select>
+    </p>
+    <p>
+        <a ng-click="editUserProfile(adData)" class="button">Update</a>
+        <a href="#/user/home" class="button">Cancel</a>
+    <p>
+</div>

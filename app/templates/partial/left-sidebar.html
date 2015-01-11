@@ -2,9 +2,7 @@
 <div ng-if="authService.isAnonymous()" class="box">
     <h2>Navigation</h2>
     <ul class="sidebar-menu">
-        <li><a href="#/">Home</a></li>
-        <li><a href="#/login">Login</a></li>
-        <li><a href="#/register">Register</a></li>
+        <li class="special selected"><a href="#/">Home</a></li>
     </ul>
 </div>
 
@@ -16,15 +14,29 @@
 </div>
 
 <!-- Navigation box for logged in normal users (not admins) -->
-<div ng-if="authService.isNormalUser()" class="box">
-    <h2>Navigation</h2>
-    <ul class="sidebar-menu">
-        <li><a href="#/">Home</a></li>
-        <li><a href="#/user/ads">My Ads</a></li>
-        <li><a href="#/user/ads/publish">Publish New Ad</a></li>
-        <li><a href="#/user/profile">Edit Profile</a></li>
-        <li><a ng-click="logout()">Logout</a></li>
-    </ul>
+<div ng-if="authService.isNormalUser()">
+    <div class="box">
+        <h2>Navigation</h2>
+        <ul class="sidebar-menu">
+            <li><a href="#/user/home">Home</a></li>
+            <li><a href="#/user/ads">My Ads</a></li>
+            <li><a href="#/user/ads/publish">Publish New Ad</a></li>
+            <li><a href="#/user/profile">Edit Profile</a></li>
+            <li><a href="#/user/changePassword">Change Password</a></li>
+            <li><a ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+
+    <div ng-if='pageTitle === "My Ads"' class="box" ng-controller="UserAdsController">
+        <h2>My Ads</h2>
+        <ul class="sidebar-menu">
+            <li><a href="#/user/ads">All</a></li>
+            <li><a ng-click="filterUserAd()" href="#/user/ads/filter/2">Published</a></li>
+            <li><a ng-click="filterUserAd()" href="#/user/ads/filter/1">Waiting Approval</a></li>
+            <li><a ng-click="filterUserAd()" href="#/user/ads/filter/0">Inactive</a></li>
+            <li><a ng-click="filterUserAd()" href="#/user/ads/filter/3">Rejected</a></li>
+        </ul>
+    </div>
 </div>
 
 <!-- Navigation box for logged in admins -->
@@ -32,7 +44,7 @@
     <h2>Administrator</h2>
     <ul class="sidebar-menu">
         <li><a href="#/admin/ads">Ads</a></li>
-        <li><a href="#/admin/users">Users</a></li>
+        <li><a href="#/admin/users" ng-click="getUsers()">Users</a></li>
         <li><a href="#/admin/categories">Categories</a></li>
         <li><a href="#/admin/towns">Towns</a></li>
         <li><a ng-click="logout()">Logout</a></li>

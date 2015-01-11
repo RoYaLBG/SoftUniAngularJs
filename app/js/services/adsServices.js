@@ -6,7 +6,9 @@ app.factory('adsService',
             baseServiceUrl + '/api/ads',
             null,
             {
-                'getAll': {method:'GET'}
+                'getAll': {
+                    method:'GET'
+                }
             }
         );
 
@@ -18,13 +20,13 @@ app.factory('adsService',
     }
 );
 
-app.factory('userAdsService',
+app.factory('adminAdsService',
     function ($http, baseServiceUrl, authService) {
         return {
             findOne: function(id, success, error) {
                 var request = {
                     method: "GET",
-                    url: baseServiceUrl + '/api/user/Ads/' + id,
+                    url: baseServiceUrl + '/api/admin/Ads/' + id,
                     headers: authService.getAuthHeaders()
                 };
 
@@ -33,9 +35,18 @@ app.factory('userAdsService',
             edit: function(params, success, error) {
                 var request = {
                     method: "PUT",
-                    url: baseServiceUrl + '/api/user/Ads/' + params.id,
+                    url: baseServiceUrl + '/api/admin/Ads/' + params.id,
                     headers: authService.getAuthHeaders(),
                     data: JSON.stringify(params)
+                }
+
+                $http(request).success(success).error(error);
+            },
+            deleteAd: function(id, success, error) {
+                var request = {
+                    method: "DELETE",
+                    url: baseServiceUrl + '/api/admin/Ads/' + id,
+                    headers: authService.getAuthHeaders()
                 }
 
                 $http(request).success(success).error(error);
@@ -43,8 +54,6 @@ app.factory('userAdsService',
         }
     }
 );
-
-
 
 app.factory('categoriesService',
     function ($resource, baseServiceUrl) {
@@ -59,7 +68,6 @@ app.factory('categoriesService',
         }
     }
 );
-
 
 app.factory('townsService',
     function ($resource, baseServiceUrl) {

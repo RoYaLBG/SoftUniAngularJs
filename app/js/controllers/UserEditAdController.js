@@ -1,27 +1,42 @@
 'use strict';
 
 app.controller('UserEditAdController',
-    function ($scope, $location, $routeParams, townsService, categoriesService,
-              userService, notifyService, userAdsService) {
+    function ($scope, $rootScope, $routeParams, $location, townsService, categoriesService, userService, notifyService) {
+        $rootScope.pageTitle = "Edit Ad";
 
-        userAdsService.findOne($routeParams.id, function(response) {
-            $scope.adData = response;
+        userService.getUserAd($routeParams.id, function(data) {
+            $scope.adData = data;
         });
 
-        $scope.categories = categoriesService.getCategories();
         $scope.towns = townsService.getTowns();
+        $scope.categories = categoriesService.getCategories();
 
-
-        $scope.editAd = function(adData) {
-            userAdsService.edit(
+        $scope.editUserAds = function(adData) {
+            userService.editUserAd(
                 adData,
-                function() {
-                    notifyService.showInfo("Succesfully edited ad");
+                function success(data) {
+                    notifyService.showInfo('Successfully edited ad');
+                    $location.path("/user/ads");
                 },
-                function() {
-                    notifyService.showError("Error editting ad");
+                function error(err) {
+                    notifyService.showError('Cannot edit ad');
                 }
-            );
-        }
+            )
+        };
+
+        $scope.fileSelected = function(fileInputField) {
+            delete $scope.adData.imageDataUrl;
+            var file = fileInputField.files[0];
+            if (file.type.match(/image\/.*/)) {
+                var reader = new FileReader();
+                reader.onload = function() {
+                    $scope.adData.imageDataUrl = reader.result;
+                    $(".image-box").html("<img src='" + reader.result + "'>");
+                };
+                reader.readAsDataURL(file);
+            } else {
+                $(".image-box").html("<p>File type not supported!</p>");
+            }
+        };
     }
 );

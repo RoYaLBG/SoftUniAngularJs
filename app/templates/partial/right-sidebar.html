@@ -1,4 +1,4 @@
-<div class="box">
+<div ng-if='pageTitle === "Home"' class="box">
     <h2>Categories</h2>
     <ul class="sidebar-menu">
         <li class="special"
@@ -14,7 +14,7 @@
     </ul>
 </div>
 
-<div class="box">
+<div class="box" ng-if='pageTitle === "Home"'>
     <h2>Towns</h2>
     <ul class="sidebar-menu">
         <li class="special"
